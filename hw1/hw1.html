@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Sign Up</h1>
+    <div id="nameDiv" class="div">
+        <input id="firstname" class="inputbox" type="text" name="first"  placeholder="First Name" required>
+        <input id="lastname" class="inputbox" type="text" name="last" placeholder="Last Name" required>
+        
+    </div>
+    <div id="phoneDiv" class="div">
+        <input type="tel" class="inputbox" id="phone" name="phone" placeholder="Mobile No."pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+    </div>
+    <div id="emailDiv" class="div">
+        <input id="emailText" class="inputbox" type="email" name="Email" placeholder="Email Address"required>
+    </div>
+    <div id="passwordDiv" class="div">
+        <input id="password" class="inputbox" type="text" name="password"  placeholder="Password" required>
+        <input id="conPassword" class="inputbox" type="text" name="conpassowrd" placeholder="Confirm Password" required>
+    </div>
+    <div id="agree" class="div">
+        <input id="checkbox" type="checkbox" name="CheckBox" >
+        <label for="checkbox">I Agree</label>
+        <div id="text"> <p>By clicking <span id="r" >Register</span>,you agree to the <span id="tc">Terms and Conditions</span> set outside by this site,including our Cookie Use.</p></div>
+
+    </div>
+    <div  id="button">
+        <button type="button" id="Register">Register</button>
+        <button type="button" id="signIn">Sign In</button>
+    </div>
+    
+    
+</body>
+</html>

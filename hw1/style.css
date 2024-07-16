@@ -1,0 +1,118 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+h1{
+    text-align: center;
+}
+div{ 
+    padding-bottom: 15px;
+  
+}
+#firstname{
+    width:200px;
+    height:30px;
+    margin-left: 50px;
+    font-size: large;
+    border-radius: 5px;
+}
+#lastname{
+    width:200px;
+    height:30px;
+    margin-left: 50px;
+    font-size: large;
+    border-radius: 5px;
+}
+#phone{
+    width:460px;
+    height:30px;
+    margin-left: 50px;
+    font-size: large;
+    border-radius: 5px;
+}
+#emailText{
+    width:460px;
+    height:30px;
+    margin-left: 50px;
+    font-size: large;
+    border-radius: 5px;
+}
+#password{
+    width:200px;
+    height:30px;
+    margin-left: 50px;
+    font-size: large;
+    border-radius: 5px;
+}
+#conPassword{
+    width:200px;
+    height:30px;
+    margin-left: 50px;
+    font-size: large;
+    border-radius: 5px;
+}
+
+#agree {
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+    margin-top: 10px;
+}
+#checkbox{
+    margin-left: 30px;
+}
+label{
+    font-weight: bold;
+}
+#agree #text {
+    margin-left: 40px;
+    width:380px;
+    word-wrap: break-word;
+}
+
+p {
+    font-size: 13px;
+    display: inline;
+}
+#r{
+    border-radius: 5px;
+    width:20px;
+    color:white;
+    background-color: rgba(0, 126, 253, 0.762);
+}
+#tc{
+    color:rgba(0, 126, 253, 0.762);
+}
+
+#Register {
+    margin-left:0;
+    width: 200px;
+    height: 50px;
+     
+}
+#signIn {
+    display: inline-block;
+    width: auto;
+    margin-right: 10px; 
+}
+#Register, #signIn {
+    margin-left: 10px; 
+    height: 50px; 
+    width: 250px; 
+    display: inline-block; 
+}
+#Register{
+    background-color:rgba(0, 126, 253, 0.762);
+    color:white;
+    font-size: larger;
+    border-radius: 10px;
+}
+#signIn{
+    background-color:rgba(6, 111, 4, 0.762);
+    color:white;
+    font-size: larger;
+    border-radius: 10px;
+}
