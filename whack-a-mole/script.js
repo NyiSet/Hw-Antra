@@ -12,14 +12,20 @@ class State {
     #score = 0;
     #time = 30;
     #maxMoles = 3;
-    #intervalId = null;
-    #timerId = null;
+    #intervalId = null; //mole interval
+    #timerId = null; //time interval
+    #snakeIntervalId = null;
 
     constructor(view, model) {
         this.view = view;
         this.#board = model; // Initialize board from model
     }
-
+    get sankeIntervalId(){
+        return this.#snakeIntervalId;
+    }
+    set sankeIntervalId(newIntervalId){
+        this.#snakeIntervalId =newIntervalId;
+    }
     get board() {
         return this.#board;
     }
@@ -62,7 +68,14 @@ class State {
     endGame() {
         clearInterval(this.#intervalId);
         clearInterval(this.#timerId);
+        clearInterval(this.sankeIntervalId);
         alert('Time is Over!');
+    }
+    gameOver(){
+        clearInterval(this.#intervalId);
+        clearInterval(this.#timerId);
+        clearInterval(this.#snakeIntervalId);
+        console.log("Game over");
     }
 
     getRandomEmptyHole() {
@@ -76,10 +89,11 @@ class State {
 
     getRandomSnakeHole(){
         const snakeHoles= this.#board.filter(hole => !hole.hasSnake);
+        
         if (snakeHoles.length === 0) {
             return null;
         }
-        const randomIndex = Math.floor(Math.random() * emptyHoles.length);
+        const randomIndex = Math.floor(Math.random() * snakeHoles.length);
         return snakeHoles[randomIndex];
     }
 
@@ -94,18 +108,32 @@ class State {
         }
     }
     addSnake(){
+        this.removeallSnake();
         const hole= this.getRandomSnakeHole();
         if (hole) {
-            hole.hasMole = true;
+            hole.hasSnake = true;
+            console.log(`Snake added to hole ${hole.id}`);
             this.view.renderSnake(hole.id);
         }
+    }
+    removeallSnake(){
+        this.#board.forEach(hole => {
+            if (hole.hasSnake) {
+                hole.hasSnake = false;
+                this.view.removeSnake(hole.id);
+            }
+        });
+
     }
 
     showAllSnake(){
         const holes= this.#board.forEach(hole=>{
-            
-
+            if(hole){
+                hole.hasSnake = true;
+                this.view.renderSnake(hole.id);
+            }
         });
+        this.gameOver();
     }
 
     removeMole(id) {
@@ -116,6 +144,13 @@ class State {
         }
     }
 
+    removeSnake(){
+        const hole= this.#board.filter(hole => hole.hasSnake);
+        if(hole){
+            hole.hasSnake =false;
+            this.view.removeSnake(hole.id);
+        }
+    }
     
 
     decrementTime() {
@@ -155,12 +190,20 @@ const View = (() => {
         document.getElementById(id).innerHTML = '';
     };
 
+    const removeSnake = (id) => {
+        document.getElementById(id).innerHTML = '';
+    };
     const updateScore = (score) => {
         document.getElementById('score').innerText = `${score}`;
     };
 
     const updateTimer = (time) => {
         document.getElementById('time').innerText = time;
+    };
+
+    const renderSnake=(id)=>{
+        let i= parseInt(id)
+        document.getElementById(id).innerHTML = `<img src="snake.jpg" alt="Mole" width="200" height="200" id=${i}>`;
     };
 
     const renderBoard = (board) => {
@@ -176,7 +219,9 @@ const View = (() => {
         removeMole,
         updateScore,
         updateTimer,
-        renderBoard
+        renderBoard,
+        renderSnake,
+        removeSnake
     };
 })();
 
@@ -190,6 +235,10 @@ const Controller = ((model, view) => {
             state.intervalId = setInterval(() => {
                 state.addMole();
             }, 1000);
+            state.snakeIntervalId = setInterval(() => {
+                state.addSnake();
+            }, 2000);
+    
             state.timerId = setInterval(() => {
                 state.decrementTime();
             }, 1000);
@@ -205,6 +254,9 @@ const Controller = ((model, view) => {
             if (hole && hole.hasMole) {
                 state.removeMole(id);
                 state.score++;
+            }
+            else if( hole && hole.hasSnake){
+                state.showAllSnake();
             }
         });
         
