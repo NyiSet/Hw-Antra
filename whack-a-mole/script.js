@@ -20,10 +20,10 @@ class State {
         this.view = view;
         this.#board = model; // Initialize board from model
     }
-    get sankeIntervalId(){
+    get snakeIntervalId(){
         return this.#snakeIntervalId;
     }
-    set sankeIntervalId(newIntervalId){
+    set snakeIntervalId(newIntervalId){
         this.#snakeIntervalId =newIntervalId;
     }
     get board() {
@@ -68,7 +68,7 @@ class State {
     endGame() {
         clearInterval(this.#intervalId);
         clearInterval(this.#timerId);
-        clearInterval(this.sankeIntervalId);
+        clearInterval(this.#snakeIntervalId);
         alert('Time is Over!');
     }
     gameOver(){
@@ -79,7 +79,7 @@ class State {
     }
 
     getRandomEmptyHole() {
-        const emptyHoles = this.#board.filter(hole => !hole.hasMole);
+        const emptyHoles = this.#board.filter(hole => !hole.hasMole && !hole.hasSnake);
         if (emptyHoles.length === 0) {
             return null;
         }
